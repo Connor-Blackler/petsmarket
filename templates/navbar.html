@@ -1,8 +1,246 @@
 {% load static %}
 
-<!-- Header Section -->
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+    user-select: none;         /* Chrome and other browsers */
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1
+}
+
+.navbar2 {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 0px;
+    height: 80px;
+}
+
+.header2 {
+    max-width: 5000px;
+    display: grid;
+    grid-template-areas: "left-icon heading icons";
+    grid-template-columns: 1fr 3fr 1fr;
+    align-items: center;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.navbar1 {
+    display: flex;
+}
+
+.navbar-icon {
+    margin-right: 10px;
+    display: flex;
+    align-items: left;
+}
+
+.navbar-buttons {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-grow: 1;
+    position: relative;
+    height: 66px;
+}
+
+.navbar-buttons-checkout {
+    display: flex;
+    justify-content: right;
+    height: 52px;
+}
+
+.navbar-button {
+    margin: 0 10px;
+    padding: 0px 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.0s;
+    position: relative;
+    z-index: 1;
+    font-family: 'Whitney-Semibold','Open Sans',Arial,Helvetica,sans-serif;
+}
+
+.navbar-button::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background-color: transparent;
+    transition: background-color 0.0s;
+    z-index: -1;
+    font-family: 'Whitney-Semibold','Open Sans',Arial,Helvetica,sans-serif;
+}
+
+.navbar-button:hover::before {
+    background-color: #22A954;
+}
+
+/* Expanded section styles */
+.expanded-section {
+    display: none;
+    padding: 0px;
+    justify-content: center;
+}
+
+.expanded-section.active {
+    display: flex;
+    background-color: #474647;
+    box-shadow: 0 6px 12px 0 rgba(0,0,0,0.07),0 2px 4px rgba(0,0,0,0.05);
+}
+
+.expanded-button {
+    height: 40px;
+    max-width: 66px;
+    background-color: #474647;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.0s;
+    position: relative;
+    z-index: 1;
+    padding: 0 0px 0 0px;
+    color: #fff;
+    font-family: 'whitneymedium','Open Sans',Arial,Helvetica,sans-serif;
+    font-size: 14px;
+}
+
+.topleft-logo {
+    width: 82px;
+    height: 82px;
+    top: -6px
+}
+
+.topleft-logo-text {
+    width: 240px;
+    height: 80px;
+}
+
+.topleft-logo-text-small {
+    width: 120px;
+    height: 40px;
+}
+
+.navbar-adjustment {
+    width: 320px;
+    height: 80px;
+}
+
+.basket-logo {
+    width: 24px;
+    height: 24px;
+}
+
+.basket-holder {
+    margin-right: 24px;
+    margin-left: 24px;
+    width: 24px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+}
+
+.expanded-button-holder {
+    height: 100%!important;
+    display: flex!important;
+    flex-direction: column!important;
+    justify-content: center!important;
+    cursor: pointer;
+    margin-right: 16px;
+    margin-left: 16px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.expanded-button-holder::before {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background-color: transparent;
+    transition: background-color 0.0s;
+    z-index: -1;
+}
+
+.expanded-button-holder:hover::before {
+    background-color: #22A954;
+    z-index: 9999;
+}
+
+.expanded-logo {
+    width: 64px;
+    height: 64px;
+    margin-top: 8px;
+}
+
+.expanded-logo::before {
+    content: "";
+    position: absolute;
+    top: 112px;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background-color: transparent;
+    transition: background-color 0.0s;
+    z-index: 999;
+}
+
+.expanded-logo:hover::before {
+    background-color: #22A954;
+}
+
+.navbar-collapse {
+    flex-basis: 100%;
+    flex-grow: 1;
+    align-items: center;
+    margin-left: 8px;
+}
+
+.mb-2 {
+    margin-bottom: 0.0!important;
+}
+
+@media only screen and (min-width: 992px) {
+    .small-mode {
+        display: none;
+    }
+
+    .small-mode2 {
+        display: block;
+  }
+}
+
+</style>
+
 <header class="header">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar navbar1 fixed-top navbar-expand-lg navbar-light bg-white small-mode">
         <div class="container">    
             <!-- Toggle button -->
             <button
@@ -19,54 +257,382 @@
 
             <!-- Collapsible wrapper -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent1">      
-            <!-- Navbar brand -->
-            <a class="navbar-brand mt-2 mt-sm-0" href="{% url 'home' %}">
-                <img
-                src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-                height="20"
-                alt="MDB Logo"
-                loading="lazy"
-                />
-            </a>
-            <!-- Left links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item active">
-                <a class="nav-link " href="{% url 'home' %}">Home</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="{% url 'products' %}">Products</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="{% url 'product' 245 %}">Specific product</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="{% url 'checkout' %}">checkout</a>
-                </li>
-            </ul>
-            <!-- Left links -->      
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item active">
+                    <a class="nav-link " href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'products' %}">Products</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'product' 245 %}">Specific product</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'checkout' %}">checkout</a>
+                    </li>
+                </ul>
+                <!-- Left links -->      
             </div>
-            <!-- Collapsible wrapper -->
-            
-            <!-- Right elements -->
-            <div class="d-flex align-items-center">
-            <!-- Icon -->
-            <a class="nav-link me-3" href="#">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="badge rounded-pill badge-notification bg-danger">1</span>
-            </a>
+                <!-- Collapsible wrapper -->
+                <a class="navbar-icon" href="{% url 'home' %}">
+                    <img class="topleft-logo-text-small" src="https://cdn.shopify.com/s/files/1/0751/6933/3537/files/logo_text.svg?v=1683199491.svg">
+                </a>
 
-            <a class="nav-link me-3" href="#">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a class="nav-link me-3" href="#">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="border rounded px-2 nav-link"
-                    target="_blank">
-                    <i class="fab fa-github me-2"></i>MDB GitHub
-                    </a>
-            </div>
-            <!-- Right elements -->
+                <!-- Right elements -->
+                <div class="d-flex align-items-center">
+                <!-- Icon -->
+                <a class="nav-link me-3" href="#">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                </a>
         </div>
     </nav>
+
+    <nav class="navbar navbar2 small-mode2">
+        <header class="header2">
+            <a href="{% url 'home' %}" class="navbar-left">
+                <div class="navbar-icon">
+                    <img class="topleft-logo" src="https://cdn.shopify.com/s/files/1/0751/6933/3537/files/logo_dog.svg?v=1683199491.svg">
+                    <img class="topleft-logo-text" src="https://cdn.shopify.com/s/files/1/0751/6933/3537/files/logo_text.svg?v=1683199491.svg">
+                </div>
+            </a>
+            <div class="navbar-buttons center">
+                <button class="navbar-button" id="expand-button-dog">Dogs</button>
+                <button class="navbar-button" id="expand-button-cat">Cats</button>
+                <button class="navbar-button" id="expand-button-smallanimals">Small Animals</button>
+                <button class="navbar-button" id="expand-button-birds">Birds</button>
+                <button class="navbar-button" id="expand-button-fish">Fish</button>
+                <button class="navbar-button" id="expand-button-reptiles">Reptiles</button>
+                <button class="navbar-button" id="expand-button-support">Support</button>
+            </div>
+            <div class="navbar-right">
+                <a class="nav-link me-3" href="{% url 'checkout' %}">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                </a>
+            </div>
+        </header>
+    </nav>
+
+    <div class="expanded-section" id="expanded-section-dog">
+        <a class="expanded-button-holder" href="{% url 'products' %}">
+            <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+            <button class="expanded-button">Featured</button>
+        </a>
+        <a class="expanded-button-holder" href="{% url 'products' %}">
+            <img class="expanded-logo" src="resources/navbar/dog_bone.png"></img>
+            <button class="expanded-button">Toys</button>
+        </a>
+        <a class="expanded-button-holder" href="{% url 'products' %}">
+            <img class="expanded-logo" src="resources/navbar/dog_house.png"></img>
+            <button class="expanded-button">Treats</button>
+        </a>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_foot.png"></img>
+        <button class="expanded-button">Beds</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_foot.png"></img>
+        <button class="expanded-button">Grooming</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Collars & Harnesses</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Leads</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_house.png"></img>
+        <button class="expanded-button">Travel</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Bowls & Feeding</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Clothing</button>
+        </div>
+    </div>
+
+    <div class="expanded-section" id="expanded-section-cat">
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Featured</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_bone.png"></img>
+        <button class="expanded-button">Toys</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_house.png"></img>
+        <button class="expanded-button">Treats</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_foot.png"></img>
+        <button class="expanded-button">Beds</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_foot.png"></img>
+        <button class="expanded-button">Grooming</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Collars & Harnesses</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Scratching</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_house.png"></img>
+        <button class="expanded-button">Travel</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Bowls & Feeding</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Litter Trays & Mats</button>
+        </div>
+    </div>
+
+    <div class="expanded-section" id="expanded-section-smallanimals">
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Featured</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_bone.png"></img>
+        <button class="expanded-button">Toys</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_house.png"></img>
+        <button class="expanded-button">Treats</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_foot.png"></img>
+        <button class="expanded-button">Cages & Hutches</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Grooming</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Bowls & Bottles</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Beds & Dens</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Travel</button>
+        </div>
+    </div>
+
+    <div class="expanded-section" id="expanded-section-birds">
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Featured</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_bone.png"></img>
+        <button class="expanded-button">Toys</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_house.png"></img>
+        <button class="expanded-button">Treats</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_foot.png"></img>
+        <button class="expanded-button">Perches</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Cleaning</button>
+        </div>
+    </div>
+
+    <div class="expanded-section" id="expanded-section-fish">
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Featured</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_bone.png"></img>
+        <button class="expanded-button">Toys</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_house.png"></img>
+        <button class="expanded-button">Tanks & Cabinets</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_foot.png"></img>
+        <button class="expanded-button">Lighting</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Filters</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Ornaments</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Plants</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Gravel</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Cleaning</button>
+        </div>
+    </div>
+
+    <div class="expanded-section" id="expanded-section-reptiles">
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Featured</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_bone.png"></img>
+        <button class="expanded-button">Toys</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_house.png"></img>
+        <button class="expanded-button">Tanks & Cabinets</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_foot.png"></img>
+        <button class="expanded-button">Lighting</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Heating</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Ornaments</button>
+        </div>
+    </div>
+
+    <div class="expanded-section" id="expanded-section-support">
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">Track Order</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_bone.png"></img>
+        <button class="expanded-button">FAQ</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_house.png"></img>
+        <button class="expanded-button">Contact Us</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/dog_foot.png"></img>
+        <button class="expanded-button">Careers</button>
+        </div>
+        <div class="expanded-button-holder">
+        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+        <button class="expanded-button">About Us</button>
+        </div>
+    </div>
+
+  <script>
+    const dict = {
+      "expand-button-dog": document.getElementById('expanded-section-dog'),
+      "expand-button-cat": document.getElementById('expanded-section-cat'),
+      "expand-button-smallanimals": document.getElementById('expanded-section-smallanimals'),
+      "expand-button-birds": document.getElementById('expanded-section-birds'),
+      "expand-button-fish": document.getElementById('expanded-section-fish'),
+      "expand-button-reptiles": document.getElementById('expanded-section-reptiles'),
+      "expand-button-support": document.getElementById('expanded-section-support')
+    };
+
+    const navbarButtons = document.querySelectorAll('.navbar-button');
+
+    navbarButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        expandedSection = dict[button.id];
+
+        if (expandedSection.classList.contains('active')) {
+          button.style.borderTop = "none";
+        } else {
+          button.style.borderTop = "6px solid #22A954";
+        }
+        
+        navbarButtons.forEach(otherBtn => {
+          if (otherBtn !== button) {
+            otherBtn.style.borderTop = "none";
+          }
+        });
+
+        expandedSection.classList.toggle('active');
+
+        navbarButtons.forEach(otherBtn => {
+          if (otherBtn.id !== button.id) {
+            otherSection = dict[otherBtn.id];
+            if (otherSection.classList.contains('active')) {
+              otherSection.classList.remove('active');
+            }
+          }
+        });
+      });
+    });
+
+    window.addEventListener('DOMContentLoaded', function() {
+        let activeButtonId = '';
+
+        function checkExpandedSections() {
+            navbarButtons.forEach(button => {
+                expandedSection = dict[button.id];
+                if (window.innerWidth < 990) {
+                if (expandedSection.classList.contains('active')) {
+                    expandedSection.classList.remove('active');
+                    button.style.borderTop = "none";
+                    activeButtonId = button.id;
+                }
+                } else if (activeButtonId) {
+                const activeButton = document.getElementById(activeButtonId);
+                const activeExpandedSection = dict[activeButtonId];
+
+                if (!activeExpandedSection.classList.contains('active')) {
+                    activeExpandedSection.classList.add('active');
+                    activeButton.style.borderTop = "6px solid #22A954";
+                }
+                activeButtonId = '';
+                }
+            });
+            }
+
+        function toggleNavbarVisibility() {
+            var navbar = document.getElementById('main-navbar');
+            const headerwrappers = document.getElementsByClassName('header-wrapper');
+            checkExpandedSections();
+
+            for (let i = 0; i < headerwrappers.length; i++) {
+                if (window.innerWidth < 990) {
+                navbar.style.display = 'none';
+                headerwrappers[i].style.display = "block";
+                } else {
+                navbar.style.display = 'block';
+                headerwrappers[i].style.display = "none";
+                }
+            }
+        }
+        toggleNavbarVisibility();
+        window.addEventListener('resize', toggleNavbarVisibility);
+    });
+
+    </script>
 </header>
