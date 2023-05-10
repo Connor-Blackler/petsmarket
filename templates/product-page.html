@@ -1,5 +1,6 @@
 {% extends 'header-and-footer.html' %}
 {% load static %}
+{% load mathfilters %}
 
 {% block content %}
 <body>
@@ -17,24 +18,26 @@
                 <!--Grid column-->
                 <div class="col-md-6 mb-4">
                     <!--Content-->
+                    
                     <div class="p-4">
                         <div class="mb-3">
-                            <a href="">
-                                <span class="badge bg-dark me-1">Category 2</span>
-                            </a>
-                            <a href="">
-                                <span class="badge bg-info me-1">New</span>
-                            </a>
-                            <a href="">
-                                <span class="badge bg-danger me-1">Bestseller</span>
-                            </a>
+                            <div style="display:flex">
+                                {% if item.discount %}
+                                    <h5><span class="badge sale-badge ms-2">-{{item.discount.discount_amount}}%</span></h5>
+                                {% endif %}
+                                {% for label in item.labels.all %}
+                                    <h5><span class="badge bg-{{label.ui_flag}} ms-2">{{label.title}}</span></h5>
+                                {% endfor %}
+                            </div>
                         </div>
 
                         <p class="lead">
+                            {% if item.discount %}
                             <span class="me-1">
-                                <del>$200</del>
+                                <del>£{{item.price}}</del>
                             </span>
-                            <span>$100</span>
+                            {% endif %}
+                            <span>£{{item.get_discounted_price}}</span>
                         </p>
 
                         <strong><p style="font-size: 20px;">Description</p></strong>

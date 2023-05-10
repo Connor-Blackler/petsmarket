@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 from .models import Item
 
 # Create your views here.
@@ -16,17 +17,11 @@ def checkout(request):
     return render(request, "checkout-page.html", context)
 
 
-def product_search_page(request):
-    context = {
-        "items": Item.objects.all()
-    }
-
-    return render(request, "product-search-page.html", context)
+class ProductSearchView(ListView):
+    model = Item
+    template_name = "product-search-page.html"
 
 
-def single_product_page(request, pk):
-    context = {
-        "item": Item.objects.all()
-    }
-
-    return render(request, "product-page.html", context)
+class ProductView(DetailView):
+    model = Item
+    template_name = "product-page.html"
