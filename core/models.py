@@ -3,6 +3,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.urls import reverse
 import uuid
+import math
 
 
 UI_FLAG_CHOICES = (
@@ -79,7 +80,7 @@ class Item(models.Model):
 
     def get_discounted_price(self):
         if self.discount:
-            return round(self.discount.apply_discount(self.price), 2)
+            return round(math.ceil(self.discount.apply_discount(self.price)) - 0.01, 2)
         else:
             return self.price
 
