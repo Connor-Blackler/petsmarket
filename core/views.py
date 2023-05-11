@@ -31,6 +31,7 @@ class ProductView(DetailView):
 
 def add_to_cart(request, pk):
     item = get_object_or_404(Item, pk=pk)
+    print(request.user.is_authenticated)
     order_item, created = OrderItem.objects.get_or_create(
         item=item,
         user=request.user,

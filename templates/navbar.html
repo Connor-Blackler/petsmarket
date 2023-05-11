@@ -82,6 +82,8 @@
     position: relative;
     z-index: 1;
     font-family: 'Whitney-Semibold','Open Sans',Arial,Helvetica,sans-serif;
+    white-space: nowrap;
+    min-width: fit-content;
 }
 
 .navbar-button::before {
@@ -228,11 +230,12 @@
     margin-left: 8px;
 }
 
+
 .mb-2 {
     margin-bottom: 0.0!important;
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1120px) {
     .small-mode {
         display: none;
     }
@@ -286,13 +289,22 @@
                     <a class="nav-link " href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="{% url 'products' %}">Products</a>
+                    <a class="nav-link" href="{% url 'products' %}">All Products</a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="{% url 'product' 245 %}">Specific product</a>
                     </li>
+                    {% if request.user.is_authenticated %}
                     <li class="nav-item">
-                    <a class="nav-link" href="{% url 'checkout' %}">checkout</a>
+                        <a class="nav-link" href="{% url 'user-account' %}">My Account</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_login' %}">Sign In</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'checkout' %}">Checkout</a>
                     </li>
                 </ul>
                 <!-- Left links -->      
@@ -328,6 +340,12 @@
                 <button class="navbar-button" id="expand-button-fish">Fish</button>
                 <button class="navbar-button" id="expand-button-reptiles">Reptiles</button>
                 <button class="navbar-button" id="expand-button-support">Support</button>
+                {% if request.user.is_authenticated %}
+                    <button class="navbar-button" onclick="redirectToUserAccount()">My Account</button>
+                {% else %}
+                    <button class="navbar-button" onclick="redirectToSignIn()">Sign In</button>
+                {% endif %}
+                
             </div>
             <div class="navbar-right">
                 <a class="nav-link me-3" href="{% url 'checkout' %}">
@@ -623,7 +641,7 @@
         function checkExpandedSections() {
             navbarButtons.forEach(button => {
                 expandedSection = dict[button.id];
-                if (window.innerWidth < 990) {
+                if (window.innerWidth < 1120) {
                 if (expandedSection.classList.contains('active')) {
                     expandedSection.classList.remove('active');
                     button.style.borderTop = "none";
@@ -648,7 +666,7 @@
             checkExpandedSections();
 
             for (let i = 0; i < headerwrappers.length; i++) {
-                if (window.innerWidth < 990) {
+                if (window.innerWidth < 1120) {
                 navbar.style.display = 'none';
                 headerwrappers[i].style.display = "block";
                 } else {
@@ -661,5 +679,12 @@
         window.addEventListener('resize', toggleNavbarVisibility);
     });
 
+    function redirectToUserAccount() {
+        window.location.href = "{% url 'user-account' %}";
+    }
+
+    function redirectToSignIn() {
+        window.location.href = "{% url 'account_login' %}";
+    }
     </script>
 </header>

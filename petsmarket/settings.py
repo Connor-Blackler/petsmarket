@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
+    'users.apps.UsersConfig',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -58,6 +59,8 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+
+ACCOUNT_SIGNUP_FORM = 'users.forms.CustomSignupForm'
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'

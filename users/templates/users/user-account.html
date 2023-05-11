@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="margin-top: 60px">
+    {{profile.email}} {{profile.username}} {{profile.first_name}} {{profile.last_name}}
+</div>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'account_logout' %}">Sign out</a>
+</li>
+
+{% endblock content %}
