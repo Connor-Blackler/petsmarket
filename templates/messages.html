@@ -1,0 +1,28 @@
+{% load static %}
+
+<style>
+.messages-small-mode {
+    margin-top: 60px;
+}
+
+@media only screen and (min-width: 992px) {
+    .messages-small-mode {
+        margin-top: 0px;
+    }
+}
+</style>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert messages-small-mode alert-{{message.tags}}" role="alert">
+            {{ message }}
+        </div>
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+    {% endfor %}
+{% endif %}

@@ -87,12 +87,16 @@ class Item(models.Model):
 
 class OrderItem(models.Model):
     """Item in the shopping cart relating to an item"""
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    ordered = models.BooleanField(default=False)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     id = models.UUIDField(default=uuid.uuid4, unique=True,
                           primary_key=True, editable=False)
+    quantity = models.IntegerField(default=1)
 
     def __str__(self) -> str:
-        return self.title
+        return f"{self.quantity} of {self.item.title}"
 
 
 class Order(models.Model):

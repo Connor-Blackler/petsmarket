@@ -1,4 +1,4 @@
-{% extends 'header-and-footer.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% load mathfilters %}
 
@@ -44,7 +44,7 @@
 
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dolor suscipit libero eos atque quia ipsa sint voluptatibus! Beatae sit assumenda asperiores iure at maxime atque repellendus maiores quia sapiente.</p>
 
-                        <form class="d-flex justify-content-left">
+                        {% comment %} <form class="d-flex justify-content-left">
                             <!-- Default input -->
                             <div class="form-outline me-1" style="width: 100px;">
                                 <input type="number" value="1" class="form-control" />
@@ -53,7 +53,15 @@
                                 Add to cart
                                 <i class="fas fa-shopping-cart ms-1"></i>
                             </button>
-                        </form>
+                        </form> {% endcomment %}
+                        <a href="{% url 'add-to-cart' item.id %}"class="btn btn-primary ms-1">
+                            Add to cart
+                            <i class="fas fa-shopping-cart ms-1"></i>
+                        </a>
+                        <a href="{% url 'remove-from-cart' item.id %}"class="btn btn-danger ms-1">
+                            remove from cart
+                            <i class="fas fa-shopping-cart ms-1"></i>
+                        </a>
                     </div>
                     <!--Content-->
                 </div>
