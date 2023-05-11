@@ -24,6 +24,7 @@
     background-color: #fff;
     padding: 0px;
     height: 80px;
+    z-index: 99999;
 }
 
 .header2 {
@@ -105,12 +106,16 @@
     display: none;
     padding: 0px;
     justify-content: center;
+    background-color: #474647;
 }
 
+.expanded-section2{
+    display: flex;
+    padding: 0px;
+    justify-content: center;
+}
 .expanded-section.active {
     display: flex;
-    background-color: #474647;
-    box-shadow: 0 6px 12px 0 rgba(0,0,0,0.07),0 2px 4px rgba(0,0,0,0.05);
 }
 
 .expanded-button {
@@ -237,6 +242,24 @@
   }
 }
 
+.cssanimation, .cssanimation span {
+    animation-duration: 0.2s;
+    animation-fill-mode: both;
+}
+
+.cssanimation span { display: inline-block }
+
+.fadeInBottom { animation-name: fadeInBottom }
+@keyframes fadeInBottom {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+        background-color: #474647;
+    }
+    to { opacity: 1 }
+    background-color: #474647;
+}
+
 </style>
 
 <header class="header">
@@ -315,47 +338,51 @@
         </header>
     </nav>
 
-    <div class="expanded-section" id="expanded-section-dog">
-        <a class="expanded-button-holder" href="{% url 'products' %}">
-            <img class="expanded-logo" src="resources/navbar/collar.png"></img>
-            <button class="expanded-button">Featured</button>
-        </a>
-        <a class="expanded-button-holder" href="{% url 'products' %}">
-            <img class="expanded-logo" src="resources/navbar/dog_bone.png"></img>
-            <button class="expanded-button">Toys</button>
-        </a>
-        <a class="expanded-button-holder" href="{% url 'products' %}">
-            <img class="expanded-logo" src="resources/navbar/dog_house.png"></img>
-            <button class="expanded-button">Treats</button>
-        </a>
-        <div class="expanded-button-holder">
-        <img class="expanded-logo" src="resources/navbar/dog_foot.png"></img>
-        <button class="expanded-button">Beds</button>
+    <div style="background-color: #474647; box-shadow: 0 6px 12px 0 rgba(0,0,0,0.07),0 2px 4px rgba(0,0,0,0.05);">
+    <div class="expanded-section cssanimation sequence fadeInBottom" id="expanded-section-dog">
+        <div class="expanded-section2">
+            <a class="expanded-button-holder" href="{% url 'products' %}">
+                <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+                <button class="expanded-button">Featured</button>
+            </a>
+            <a class="expanded-button-holder" href="{% url 'products' %}">
+                <img class="expanded-logo" src="resources/navbar/dog_bone.png"></img>
+                <button class="expanded-button">Toys</button>
+            </a>
+            <a class="expanded-button-holder" href="{% url 'products' %}">
+                <img class="expanded-logo" src="resources/navbar/dog_house.png"></img>
+                <button class="expanded-button">Treats</button>
+            </a>
+            <div class="expanded-button-holder">
+                <img class="expanded-logo" src="resources/navbar/dog_foot.png"></img>
+                <button class="expanded-button">Beds</button>
+            </div>
+            <div class="expanded-button-holder">
+                <img class="expanded-logo" src="resources/navbar/dog_foot.png"></img>
+                <button class="expanded-button">Grooming</button>
+            </div>
+            <div class="expanded-button-holder">
+                <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+                <button class="expanded-button">Collars & Harnesses</button>
+            </div>
+            <div class="expanded-button-holder">
+                <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+                <button class="expanded-button">Leads</button>
+            </div>
+            <div class="expanded-button-holder">
+                <img class="expanded-logo" src="resources/navbar/dog_house.png"></img>
+                <button class="expanded-button">Travel</button>
+            </div>
+            <div class="expanded-button-holder">
+                <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+                <button class="expanded-button">Bowls & Feeding</button>
+            </div>
+            <div class="expanded-button-holder">
+                <img class="expanded-logo" src="resources/navbar/collar.png"></img>
+                <button class="expanded-button">Clothing</button>
+            </div>
         </div>
-        <div class="expanded-button-holder">
-        <img class="expanded-logo" src="resources/navbar/dog_foot.png"></img>
-        <button class="expanded-button">Grooming</button>
-        </div>
-        <div class="expanded-button-holder">
-        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
-        <button class="expanded-button">Collars & Harnesses</button>
-        </div>
-        <div class="expanded-button-holder">
-        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
-        <button class="expanded-button">Leads</button>
-        </div>
-        <div class="expanded-button-holder">
-        <img class="expanded-logo" src="resources/navbar/dog_house.png"></img>
-        <button class="expanded-button">Travel</button>
-        </div>
-        <div class="expanded-button-holder">
-        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
-        <button class="expanded-button">Bowls & Feeding</button>
-        </div>
-        <div class="expanded-button-holder">
-        <img class="expanded-logo" src="resources/navbar/collar.png"></img>
-        <button class="expanded-button">Clothing</button>
-        </div>
+    </div>
     </div>
 
     <div class="expanded-section" id="expanded-section-cat">

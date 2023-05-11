@@ -45,16 +45,19 @@ def add_to_cart(request, pk):
         if order.items.filter(item__id=item.id).exists():
             order_item.quantity += 1
             order_item.save()
-            messages.info(request, "item quantity was increased")
         else:
-            messages.info(request, "item was added to the cart")
             order.items.add(order_item)
+
+        messages.info(
+            request, f"{order_item.quantity} '{order_item.item.title}' is now in your cart")
+
     else:
         ordered_date = timezone.now()
         order = Order.objects.create(
             user=request.user, ordered_date=ordered_date)
         order.items.add(order_item)
-        messages.info(request, "new cart created, item was added to the cart")
+        messages.info(
+            request, f"new cart created, {order_item.quantity} '{order_item.item.title}' is now in your cart")
 
     return redirect("product", pk=pk)
 
@@ -73,13 +76,23 @@ def remove_from_cart(request, pk):
                 user=request.user,
                 ordered=False)[0]
 
-            order.items.remove(order_item)
-            order.save()
-            messages.info(request, "item was removed")
+            order_item.quantity -= 1
+            order_item.save()
+            if order_item.quantity == 0:
+                order.items.remove(order_item)
+                order_item.delete()
+                messages.info(
+                    request, f"'{order_item.item.title}' is no longer in your cart")
+
+            else:
+                messages.info(
+                    request, f"{order_item.quantity} '{order_item.item.title}' is now in your cart")
+
             return redirect("product", pk=pk)
         else:
-            messages.info(request, "the order does not contain the item")
+            messages.info(
+                request, f"This item is not in your cart")
             return redirect("product", pk=pk)
     else:
-        messages.info(request, "the user does not have an active order")
+        messages.info(request, "You do not have an active order")
         return redirect("product", pk=pk)
