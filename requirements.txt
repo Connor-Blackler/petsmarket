@@ -4,3 +4,4 @@ pep8==1.7.1
 pycodestyle==2.10.0
 pytz==2023.3
 sqlparse==0.4.4
+django-allauth==0.54.0
