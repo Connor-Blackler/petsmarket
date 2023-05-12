@@ -14,6 +14,7 @@ class Profile(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True,
                           primary_key=True, editable=False)
+    anonymous = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.username} : {self.first_name} {self.last_name}"
